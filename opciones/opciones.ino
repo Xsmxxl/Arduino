@@ -13,7 +13,11 @@ void setup()
   lcd.init();                      // incia el lcd 
   lcd.backlight();
   Serial.begin(9600);
-  lcd.print(a[ran]); //16 espacios horizontas de la matriz 16x2
+  //lcd.print(a[ran]); //16 espacios horizontas de la matriz 16x2
+  lcd.setCursor(0,0);
+  lcd.print(a[ran]);
+  lcd.setCursor(0,1);
+  lcd.print(a[ran+1]);
 }
 
 void loop()
@@ -32,20 +36,26 @@ void loop()
 }
 
 void bajaMenu(){
-  if((ran>=0) && (ran<=3) && (a[ran] != '\0')){
+  if((ran>=0) && (ran<=2) && (a[ran] != '\0')){
             lcd.clear();
             ran++;
-            if(ran>3){
-              ran=3;
+            if(ran>2){
+              ran=2;
             }
+            lcd.setCursor(0,0);
             lcd.print(a[ran]);
+            lcd.setCursor(0,1);
+            lcd.print(a[ran+1]);
             //delay(300);
             comdata = char(Serial.read());
             Serial.println(comdata);
         }else{
           lcd.clear();
           ran--;
+          lcd.setCursor(0,0);
           lcd.print(a[ran]);
+          lcd.setCursor(0,1);
+          lcd.print(a[ran+1]);
           comdata = char(Serial.read());
         }
 };
@@ -57,7 +67,10 @@ void subeMenu(){
               if(ran<0){
               ran=0;
               }
+              lcd.setCursor(0,0);
               lcd.print(a[ran]);
+              lcd.setCursor(0,1);
+              lcd.print(a[ran+1]);
               //delay(300);
               comdata = char(Serial.read());
               Serial.println(comdata);
@@ -65,7 +78,10 @@ void subeMenu(){
           else{
           lcd.clear();
           ran++;
+          lcd.setCursor(0,0);
           lcd.print(a[ran]);
+          lcd.setCursor(0,1);
+          lcd.print(a[ran+1]);
           comdata = char(Serial.read());
         }
 }
